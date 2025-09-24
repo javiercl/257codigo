@@ -14,7 +14,7 @@ services:
       - db
 
   php:
-    image: php:8.2-fpm
+    build: .
     container_name: lemp-php
     volumes:
       - ./app:/var/www/html
