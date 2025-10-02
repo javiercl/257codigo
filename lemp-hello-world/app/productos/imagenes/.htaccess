@@ -1,0 +1,27 @@
+# Permitir acceso a archivos de imagen
+<Files "*.jpg">
+    Order Allow,Deny
+    Allow from all
+</Files>
+<Files "*.jpeg">
+    Order Allow,Deny
+    Allow from all
+</Files>
+<Files "*.png">
+    Order Allow,Deny
+    Allow from all
+</Files>
+<Files "*.gif">
+    Order Allow,Deny
+    Allow from all
+</Files>
+<Files "*.webp">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Denegar acceso a otros tipos de archivos
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

@@ -3,7 +3,6 @@ require_once '../config.php';
 
 $mensaje = '';
 $error = '';
-
 // Procesar formulario
 if ($_POST) {
     $nombre = trim($_POST['nombre'] ?? '');

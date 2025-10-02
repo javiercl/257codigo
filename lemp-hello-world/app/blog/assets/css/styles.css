@@ -1,0 +1,174 @@
+/* ====== Design Tokens ====== */
+:root{
+  --bg: #0b1220;          /* fondo principal */
+  --bg-2: #0f172a;        /* secciones */
+  --card: #101826;        /* tarjetas/frames */
+  --muted: #9aa4b2;       /* texto secundario */
+  --text: #e6edf6;        /* texto principal */
+  --line: #1f2a3a;        /* dividers, bordes */
+  --accent: #38e2ff;      /* acento principal */
+  --accent-2:#5aa9ff;     /* acento secundario */
+  --danger:#ef4444;
+  --ok:#22c55e;
+  --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+  --blur: blur(10px);
+}
+
+/* ====== Base ====== */
+*{ box-sizing: border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(88,178,255,.15), transparent 60%),
+    radial-gradient(900px 500px at -10% 40%, rgba(56,226,255,.12), transparent 55%),
+    var(--bg);
+  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a{ color: var(--accent); text-decoration: none }
+a:hover{ text-decoration: underline }
+
+.container{ max-width: 1100px; margin: 0 auto; padding: 20px }
+
+/* ====== Topbar ====== */
+.topbar{
+  position: sticky; top:0; z-index: 30;
+  display:flex; gap:16px; align-items:center; justify-content:space-between;
+  padding: 14px 20px;
+  background: linear-gradient(180deg, rgba(16,24,38,.8), rgba(16,24,38,.55));
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+.brand{
+  display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing:.3px;
+}
+.brand .logo{
+  width:34px; height:34px; border-radius:10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 10px 18px rgba(56,226,255,.25);
+}
+.topbar nav{ display:flex; gap:10px; align-items:center }
+.topbar .pill{
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 6px 10px; border-radius: 999px;
+}
+
+/* ====== Buttons ====== */
+.btn{
+  appearance:none; border:none; cursor:pointer;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, rgba(90,169,255,.22), rgba(56,226,255,.18));
+  color: var(--text);
+  border:1px solid rgba(125,170,255,.25);
+  box-shadow: var(--shadow);
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(0,0,0,.4) }
+.btn:active{ transform: translateY(0) scale(.99) }
+.btn.ghost{
+  background: transparent; border-color: var(--line); box-shadow: none;
+}
+.btn.danger{ background: linear-gradient(180deg, rgba(239,68,68,.35), rgba(239,68,68,.25)); border-color: rgba(239,68,68,.5) }
+.btn.sm{ padding:6px 10px; font-size:.92rem }
+
+/* ====== Search ====== */
+.search{ display:flex; gap:8px; align-items:center }
+.input, .search input, .modal-content input, .modal-content textarea{
+  width:100%; color:var(--text);
+  padding: 12px 12px; border-radius: 12px;
+  border:1px solid var(--line);
+  background: linear-gradient(180deg, rgba(10,16,28,.9), rgba(10,16,28,.75));
+  outline: none; transition: border-color .2s ease, box-shadow .2s ease;
+}
+.search input{ max-width: 280px }
+.input:focus, .search input:focus, .modal-content input:focus, .modal-content textarea:focus{
+  border-color: rgba(56,226,255,.55);
+  box-shadow: 0 0 0 4px rgba(56,226,255,.12);
+}
+
+/* ====== Cards / Grid ====== */
+.grid{
+  display:grid; gap:18px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+.card{
+  padding:18px; border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(17,27,41,.9), rgba(17,27,41,.7));
+  border:1px solid var(--line); box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover{ transform: translateY(-2px); border-color: rgba(56,226,255,.22); box-shadow: 0 14px 36px rgba(0,0,0,.45) }
+.card h2{ margin: 0 0 6px }
+.card small{ color: var(--muted) }
+.card p{ color: #cbd6e5 }
+
+/* ====== Table (Admin) ====== */
+.table{
+  width:100%; border-collapse: collapse; overflow:hidden;
+  border-radius: var(--radius-lg); border:1px solid var(--line);
+  background: linear-gradient(180deg, rgba(17,27,41,.8), rgba(17,27,41,.6));
+  box-shadow: var(--shadow);
+}
+.table th, .table td{ padding:14px 12px; text-align:left }
+.table thead th{
+  color:#c1cce0; font-weight:700; font-size:.95rem;
+  border-bottom:1px solid var(--line);
+  background: rgba(20,30,48,.6);
+}
+.table tbody tr{ border-top:1px solid var(--line) }
+.table tbody tr:hover{ background: rgba(56,226,255,.05) }
+
+/* ====== Pager ====== */
+.pager{ display:flex; gap:12px; align-items:center; justify-content:center; padding:18px }
+.pager span{
+  color: var(--muted);
+  padding:6px 12px; border-radius: 999px; border:1px solid var(--line);
+  background: rgba(16,25,39,.6);
+}
+
+/* ====== Modal (Glassmorphism) ====== */
+.modal{
+  position: fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  padding: 28px; background: rgba(4,8,16,.5); backdrop-filter: blur(4px);
+}
+.modal.hidden{ display:none }
+.modal-content{
+  position: relative;
+  width: min(680px, 92vw);
+  padding: 22px 18px 20px;
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(19,31,52,.7), rgba(15,23,42,.65));
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.modal-content h3{ margin:6px 0 12px; letter-spacing:.2px }
+.modal-close{
+  position:absolute; top:10px; right:10px; width:34px; height:34px;
+  border-radius: 10px; border:1px solid var(--line); background: rgba(14,22,36,.7);
+  color: var(--muted); cursor:pointer;
+}
+.modal-close:hover{ background: rgba(20,30,48,.8); color: var(--text) }
+.modal-content textarea{ min-height: 140px; resize: vertical }
+
+/* ====== Helpers ====== */
+.mt{ margin-top:16px }
+.center{ text-align:center }
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted);
+  background: rgba(18,27,43,.6);
+}
+
+/* ====== Responsive tighten ====== */
+@media (max-width: 520px){
+  .search input{ max-width: 180px }
+  .btn{ padding:9px 12px }
+}

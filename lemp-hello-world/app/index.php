@@ -414,6 +414,27 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a href="productos/" class="nav-link">Productos</a>
+                    <div class="dropdown">
+                        <a href="productos/" class="dropdown-item">
+                            <span class="icon">📦</span>
+                            Módulo de Productos
+                        </a>
+                        <a href="productos/crear_tabla.php" class="dropdown-item">
+                            <span class="icon">🏗️</span>
+                            Crear Tabla
+                        </a>
+                        <a href="productos/crear_producto.php" class="dropdown-item">
+                            <span class="icon">➕</span>
+                            Crear Producto
+                        </a>
+                        <a href="productos/listar_productos.php" class="dropdown-item">
+                            <span class="icon">📋</span>
+                            Listar Productos
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">Prácticas</a>
                     <div class="dropdown">
                         <a href="practica2.php" class="dropdown-item">
@@ -480,22 +501,47 @@
                     </div>
                 </a>
                 
+                <a href="productos/" class="quick-link">
+                    <div class="icon">📦</div>
+                    <div class="quick-link-content">
+                        <h3>Módulo de Productos</h3>
+                        <p>CRUD completo de inventario</p>
+                    </div>
+                </a>
+                
                 <a href="contacto/crear_tabla.php" class="quick-link">
                     <div class="icon">🏗️</div>
                     <div class="quick-link-content">
-                        <h3>Crear Tabla</h3>
-                        <p>Configurar la base de datos</p>
+                        <h3>Crear Tabla Contacto</h3>
+                        <p>Configurar base de datos</p>
                     </div>
                 </a>
                 
-                <a href="contacto/contacto.php" class="quick-link">
-                    <div class="icon">📝</div>
+                <a href="productos/crear_tabla.php" class="quick-link">
+                    <div class="icon">🏗️</div>
                     <div class="quick-link-content">
-                        <h3>Formulario</h3>
-                        <p>Enviar mensajes</p>
+                        <h3>Crear Tabla Productos</h3>
+                        <p>Configurar inventario</p>
                     </div>
                 </a>
                 
+                <a href="productos/listar_productos.php" class="quick-link">
+                    <div class="icon">📋</div>
+                    <div class="quick-link-content">
+                        <h3>Listar Productos</h3>
+                        <p>Ver y gestionar inventario</p>
+                    </div>
+                </a>
+                
+                <a href="blog/index.php" class="quick-link">
+                    <div class="icon">📋</div>
+                    <div class="quick-link-content">
+                        <h3>Blog con inicio de sesion</h3>
+                        <p>Blog personal</p>
+                    </div>
+                </a>
+
+
                 <a href="verificar_drivers.php" class="quick-link">
                     <div class="icon">🔍</div>
                     <div class="quick-link-content">
