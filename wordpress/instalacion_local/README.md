@@ -106,6 +106,8 @@ docker-compose ps
 # http://cms.local:8080 (opcional, requiere configuración de hosts)
 ```
 
+**Nota**: WordPress está configurado automáticamente para funcionar con el puerto 8080. No necesitas configurar manualmente las URLs.
+
 ## 📁 Estructura de Archivos
 
 ```

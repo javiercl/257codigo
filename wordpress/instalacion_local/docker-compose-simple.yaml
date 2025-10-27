@@ -21,8 +21,6 @@ services:
         if (isset($$_SERVER['HTTP_X_FORWARDED_HOST'])) {
             $$_SERVER['HTTP_HOST'] = $$_SERVER['HTTP_X_FORWARDED_HOST'];
         }
-    volumes:
-      - ./wordpress_files:/var/www/html
     networks:
       - wp_net
 
@@ -52,8 +50,8 @@ services:
       - wp_net
 
 volumes:
-  wordpress_data:
   db_data:
 
 networks:
   wp_net:
+
