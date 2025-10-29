@@ -3,6 +3,7 @@ version: '3.8'
 services:
   wordpress:
     image: wordpress:latest
+    container_name: wp-prod
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
@@ -31,6 +32,7 @@ services:
 
   db:
     image: mysql:8.0
+    container_name: wp-db
     restart: always
     environment:
       MYSQL_DATABASE: wp_db
@@ -44,6 +46,7 @@ services:
 
   nginx:
     image: nginx:latest
+    container_name: wp-nginx
     restart: always
     ports:
       - "80:80"
@@ -59,6 +62,7 @@ services:
 
   certbot:
     image: certbot/certbot
+    container_name: wp-certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
