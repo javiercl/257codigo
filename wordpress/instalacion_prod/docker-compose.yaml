@@ -72,6 +72,8 @@ services:
       --email admin@hotland.com.mx
       --agree-tos
       --no-eff-email
+      --non-interactive 
+      --force-renewal 
       -d cms.hotland.com.mx"
     networks:
       - wp_net
