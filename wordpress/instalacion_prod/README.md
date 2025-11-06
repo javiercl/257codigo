@@ -24,14 +24,30 @@ chmod -R 777 wordpress_files
 chmod -R 777 certbot
 ```
 
-### Paso 2: Iniciar los servicios
+### Paso 2: Verificar configuración de Nginx
 
 ```bash
-# Iniciar solo WordPress, MySQL y Nginx (sin SSL)
-docker-compose up -d wordpress db nginx
+# Verificar que el archivo default.conf existe
+ls -la nginx/conf.d/default.conf
+
+# Si no existe, créalo o verifica que estás en el directorio correcto
 ```
 
-### Paso 3: Obtener certificados SSL
+### Paso 3: Iniciar los servicios
+
+```bash
+# IMPORTANTE: Ejecuta docker-compose desde el directorio instalacion_prod
+cd wordpress/instalacion_prod
+
+# Iniciar solo WordPress, MySQL y Nginx (sin SSL)
+docker-compose up -d wordpress db nginx
+
+# Verificar que Nginx puede ver el archivo de configuración
+chmod +x verificar-nginx.sh
+./verificar-nginx.sh
+```
+
+### Paso 4: Obtener certificados SSL
 
 ```bash
 # Obtener los certificados SSL de Let's Encrypt
@@ -41,7 +57,7 @@ docker-compose run --rm certbot
 docker-compose run --rm certbot renew
 ```
 
-### Paso 4: Activar HTTPS
+### Paso 5: Activar HTTPS
 
 **Opción A: Usando el script automático (Recomendado)**
 
@@ -116,14 +132,34 @@ echo "0 2 1 * * cd $(pwd) && docker-compose run --rm certbot renew && docker-com
 ### Scripts de Gestión
 
 ```bash
+# Verificar que Nginx puede ver el archivo default.conf
+chmod +x verificar-nginx.sh
+./verificar-nginx.sh
+
 # Verificar que los certificados SSL están disponibles
+chmod +x verificar-certificados.sh
 ./verificar-certificados.sh
+```
 
-# Activar HTTPS automáticamente
-./activar-https.sh
+### Solución de Problemas
 
-# Desactivar HTTPS y volver a HTTP (útil para troubleshooting)
-./desactivar-https.sh
+**Problema: Nginx no encuentra el archivo default.conf**
+
+```bash
+# 1. Verifica que estás en el directorio correcto
+pwd
+# Debe mostrar: .../wordpress/instalacion_prod
+
+# 2. Verifica que el archivo existe
+ls -la nginx/conf.d/default.conf
+
+# 3. Verifica que el contenedor puede ver el archivo
+docker-compose exec nginx ls -la /etc/nginx/conf.d/
+
+# 4. Si el archivo no aparece en el contenedor:
+#    - Detén el contenedor: docker-compose down
+#    - Verifica permisos: chmod 644 nginx/conf.d/default.conf
+#    - Reinicia: docker-compose up -d nginx
 ```
 
 ### Comandos Docker
