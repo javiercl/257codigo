@@ -41,12 +41,28 @@ docker-compose run --rm certbot
 docker-compose run --rm certbot renew
 ```
 
-### Paso 4: Reiniciar Nginx con configuración SSL
+### Paso 4: Activar HTTPS
+
+**Opción A: Usando el script automático (Recomendado)**
 
 ```bash
-# Reiniciar Nginx para cargar la configuración con SSL
-docker-compose restart nginx
+# Dar permisos de ejecución a los scripts
+chmod +x verificar-certificados.sh activar-https.sh
+
+# Verificar que los certificados están disponibles
+./verificar-certificados.sh
+
+# Activar HTTPS automáticamente
+./activar-https.sh
 ```
+
+**Opción B: Manualmente**
+
+1. Edita `nginx/conf.d/default.conf`
+2. Comenta el bloque HTTP (líneas 8-90)
+3. Descomenta la redirección HTTP → HTTPS (líneas 105-112)
+4. Descomenta el bloque HTTPS completo (líneas 117-207)
+5. Reinicia Nginx: `docker-compose restart nginx`
 
 ## 🔧 Configuración
 
@@ -83,14 +99,34 @@ WordPress está configurado para:
 Los certificados de Let's Encrypt duran 90 días. Para renovar automáticamente:
 
 ```bash
-# Agregar a cron para renovación automática
+# Probar renovación (dry-run)
 docker-compose run --rm certbot renew --dry-run
 
-# Configurar renovación automática con cron
-echo "0 0 * * * cd $(pwd) && docker-compose run --rm certbot renew && docker-compose restart nginx" | crontab -
+# Renovar certificados
+docker-compose run --rm certbot renew
+
+# Configurar renovación automática con cron (renueva cada 30 días)
+echo "0 2 1 * * cd $(pwd) && docker-compose run --rm certbot renew && docker-compose restart nginx" | crontab -
 ```
 
+**Nota:** Los certificados se renuevan automáticamente si quedan menos de 30 días para expirar.
+
 ## 📝 Comandos Útiles
+
+### Scripts de Gestión
+
+```bash
+# Verificar que los certificados SSL están disponibles
+./verificar-certificados.sh
+
+# Activar HTTPS automáticamente
+./activar-https.sh
+
+# Desactivar HTTPS y volver a HTTP (útil para troubleshooting)
+./desactivar-https.sh
+```
+
+### Comandos Docker
 
 ```bash
 # Ver logs
